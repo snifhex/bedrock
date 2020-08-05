@@ -76,7 +76,13 @@ urlpatterns = (
     url(whatsnew_re, views.WhatsNewRedirectorView.as_view(), name='firefox.whatsnew'),
     url(whatsnew_re_africa, views.WhatsNewFirefoxLiteView.as_view(), name='firefox.whatsnew.africa'),
     url(whatsnew_re_india, views.WhatsNewFirefoxLiteView.as_view(), name='firefox.whatsnew.india'),
-    url(whatsnew_re_all, views.WhatsnewView.as_view(), name='firefox.whatsnew.all'),
+    # url(whatsnew_re_all, views.WhatsnewView.as_view(), name='firefox.whatsnew.all'),
+    url(whatsnew_re_all,
+        utils_views.VariationTemplateView.as_view(
+          template_name='firefox/whatsnew/index.html',
+          template_context_variations=['a', 'b', 'c', 'd'],
+          variation_locales=['en-US', 'en-CA', 'en-GB', 'de', 'fr']),
+        name='firefox.whatsnew.all'),
 
     # Release notes
     url('^firefox/(?:%s/)?(?:%s/)?notes/$' % (platform_re, channel_re),
